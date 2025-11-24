@@ -1,0 +1,30 @@
+name: Sync Infoscreen Users
+
+on:
+  schedule:
+    - cron: '*/30 * * * *' # every 30 minutes UTC
+  workflow_dispatch:      # allows manual runs
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - run: npm ci
+
+      - name: Restore Firebase key
+        run: |
+          echo "$FIREBASE_ADMIN_KEY_BASE64" | base64 --decode > firebaseAdminKey.json
+        env:
+          FIREBASE_ADMIN_KEY_BASE64: ${{ secrets.FIREBASE_ADMIN_KEY_BASE64 }}
+
+      - name: Run sync
+        run: node scripts/syncPlayer.js
+        env:
+          FIREBASE_DB_URL: ${{ secrets.FIREBASE_DB_URL }}
