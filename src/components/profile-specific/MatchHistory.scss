@@ -1,0 +1,23 @@
+.match-history {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 8px;
+
+    &__player {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    &__profile-img {
+        width: 28px;
+        height: 28px;
+        background-color: #FFFFFF;
+        border-radius: 100%;
+    }
+
+    &__score {
+        display: flex;
+        align-items: center;
+    }
+}

@@ -1,0 +1,13 @@
+.player-rank-card {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 8px;
+
+    &__position {
+        width: 32px;
+    }
+
+    &__info {
+        display: flex;
+    }
+}
