@@ -46,6 +46,7 @@ async function main() {
 
   await db.ref().update(updates);
   console.log(`Synced ${mapped.length} users`);
+  process.exit(0);
 }
 
 main().catch((err) => {
