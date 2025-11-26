@@ -1,10 +1,10 @@
 import fetch from "node-fetch";
 import { initializeApp, cert } from "firebase-admin/app";
 import { getDatabase } from "firebase-admin/database";
-import { createRequire } from 'module';
+import { createRequire } from "module";
 
 const require = createRequire(import.meta.url);
-const adminKey = require('../firebaseAdminKey.json')
+const adminKey = require("../firebaseAdminKey.json");
 
 initializeApp({
   credential: cert(adminKey),
@@ -25,19 +25,31 @@ function mapUser(user) {
 }
 
 async function main() {
-  const response = await fetch ('https://morningevents.dk/wp-json/morningevents/v1/infoscreen-users')
+  const response = await fetch(
+    "https://morningevents.dk/wp-json/morningevents/v1/infoscreen-users"
+  );
   if (!response.ok) throw new Error(`API failed: ${response.status}`);
-  const result = await response.json()
+  const result = await response.json();
 
-  const mapped = result.data.map(mapUser)
+  const mapped = result.data.map(mapUser);
+
+  const snapshot = await db.ref(USER_PATH).once("value");
+  const existing = snapshot.val() ?? {};
 
   const updates = {};
-  for(const user of mapped) {
-    updates[`${USER_PATH}/${user.id}`] = user;
+
+  // Add or update users
+  for (const user of mapped) {
+    const existingUser = existing[user.id];
+    const rating = existingUser?.rating ?? 1500;
+
+    updates[`${USER_PATH}/${user.id}`] = {
+      ...user,
+      rating,
+    };
   }
 
-  const snapshot = await db.ref(USER_PATH).once('value');
-  const existing = snapshot.val() ?? {};
+  // Remove users that are no longer present
   Object.keys(existing).forEach((id) => {
     if (!mapped.some((user) => String(user.id) === id)) {
       updates[`${USER_PATH}/${id}`] = null;
@@ -52,4 +64,4 @@ async function main() {
 main().catch((err) => {
   console.error(err);
   process.exit(1);
-})
+});
