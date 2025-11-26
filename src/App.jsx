@@ -12,7 +12,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<LeaderboardView />} />
-        <Route path="/profile" element={<ProfileView />} />
+        <Route path="/profile/:id" element={<ProfileView />} />
       </Routes>
 
       <nav className="app-nav">

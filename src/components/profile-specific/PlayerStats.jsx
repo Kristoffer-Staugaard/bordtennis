@@ -7,8 +7,8 @@ function PlayerStats() {
     <>
       <div className='player-stats'>
         <div className='player-stats__container'>
-            <h2>100</h2>
-            <h6>Point</h6>
+            <h2>2</h2>
+            <h6>Turneringer</h6>
         </div>
         <div className='player-stats__divider'></div>
         <div className='player-stats__container'>

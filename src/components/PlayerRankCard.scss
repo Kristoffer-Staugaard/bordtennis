@@ -9,5 +9,20 @@
 
     &__info {
         display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    &__avatar-container {
+        background-color: #FFFFFF;
+        height: 28px;
+        width: 28px;
+        border-radius: 100%;
+    }
+
+    &__avatar {
+        height: 28px;
+        width: 28px;
+        border-radius: 100%;
     }
 }

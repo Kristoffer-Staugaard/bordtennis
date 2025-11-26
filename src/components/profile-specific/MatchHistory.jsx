@@ -4,7 +4,6 @@ import './MatchHistory.scss'
 function MatchHistory() {
 
   return (
-    <>
       <div className='match-history'>
         <div className='match-history__player'>
           <img className='match-history__profile-img' src="" alt="" />
@@ -18,7 +17,6 @@ function MatchHistory() {
           <img className='match-history__profile-img' src="" alt="" />
         </div>
       </div>
-    </>
   )
 }
 
