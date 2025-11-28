@@ -58,7 +58,14 @@
         gap: 8px;
     }
 
-    &__player-img1 {
+    &__player1-img {
+        height: 28px;
+        width: 28px;
+        background-color: #FFFFFF;
+        border-radius: 100%;
+    }
+
+    &__player2-img {
         height: 28px;
         width: 28px;
         background-color: #FFFFFF;
