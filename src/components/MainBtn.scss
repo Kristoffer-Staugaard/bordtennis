@@ -1,0 +1,14 @@
+.mainbtn {
+    a {
+        text-decoration: none;
+    }
+
+    &__container {
+        display: flex;
+        justify-content: center;
+        background-color: #FF9452;
+        padding: 12px;
+        border-radius: 12px;
+        
+    }
+}

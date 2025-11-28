@@ -1,0 +1,11 @@
+.create {
+
+    &__btn-container {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        background-color: #FFFFFF3D;
+        padding: 12px;
+        border-radius: 20px;
+    }
+}
