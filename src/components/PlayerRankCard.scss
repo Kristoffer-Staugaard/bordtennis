@@ -4,13 +4,14 @@
     padding: 16px 8px;
 
     &__position {
-        width: 32px;
+        width: 16px;
     }
 
     &__info {
         display: flex;
         align-items: center;
         gap: 16px;
+        max-width: 230px;
     }
 
     &__avatar-container {

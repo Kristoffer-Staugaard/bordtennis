@@ -10,6 +10,12 @@ function LeaderboardView() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Failed to load users</p>;
 
+  const sortedUsers = [...users].sort((a, b) => {
+    const ratingA = a.rating;
+    const ratingB = b.rating;
+    return ratingB - ratingA;
+  });
+
   return (
     <div className="leaderboard__background">
       <div className="leaderboard__label">
@@ -17,7 +23,7 @@ function LeaderboardView() {
         <h4>Spiller</h4>
         <h4>Elo</h4>
       </div>
-      {users.map((user) => (
+      {sortedUsers.map((user, index) => (
         <Link
           key={user.id}
           to={`/profile/${user.id}`}
@@ -27,8 +33,8 @@ function LeaderboardView() {
             key={user.id}
             name={user.name}
             avatar={user.avatar}
-            rank="1"
-            points="1000 points"
+            rating={user.rating}
+            rank={index + 1}
           />
         </Link>
       ))}

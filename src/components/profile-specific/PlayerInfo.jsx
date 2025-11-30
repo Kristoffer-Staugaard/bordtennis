@@ -34,7 +34,7 @@ function PlayerInfo() {
         </div>
         <div className='player-info__text'>
           <h3>{player.name}</h3>
-          <h6>1750 point</h6>
+          <h6>{player.rating} point</h6>
         </div>
       </div>
   );
