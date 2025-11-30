@@ -27,8 +27,8 @@ export function calculateNewRating(playerRating, opponentRating, didWin) {
 }
 
 export function applyMatchToPlayers(player1, player2, winnerId) {
-    const aWon = player1.id === winnerId
-    const bWon = player2.id === winnerId
+    const aWon = String(player1.id) === String(winnerId);
+    const bWon = String(player2.id) === String(winnerId);
 
     const { newRating: newRating1, result: result1 } = calculateNewRating(
         player1.rating,
