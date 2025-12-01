@@ -1,5 +1,5 @@
 import { database } from './firebaseClient'
-import { ref, get, update } from 'firebase/database'
+import { ref, get, update, push } from 'firebase/database'
 
 export function calculateNewRating(playerRating, opponentRating, didWin) {
     let result = 0;
@@ -56,7 +56,7 @@ export function applyMatchToPlayers(player1, player2, winnerId) {
     };
 }
 
-export async function recordMatch(player1Id, player2Id, winnerId) {
+export async function recordMatch(player1Id, player2Id, winnerId, setsPlayer1, setsPlayer2) {
     // 1. Build references to both players in Firebase
     const player1Ref = ref(database, `infoscreenUsers/${player1Id}`);
     const player2Ref = ref(database, `infoscreenUsers/${player2Id}`);
@@ -85,6 +85,25 @@ export async function recordMatch(player1Id, player2Id, winnerId) {
         update(player1Ref, {rating: updated1.rating}),
         update(player2Ref, { rating: updated2.rating}),
     ]);
+
+    const matchesRef = ref(database, 'matches');
+
+    const matchData = {
+        player1Id,
+        player1Name: player1.name,
+        player1Avatar: player1.avatar ?? player1.thumbnail ?? null,
+
+        player2Id,
+        player2Name: player2.name,
+        player2Avatar: player2.avatar ?? player2.thumbnail ?? null,
+
+        setsPlayer1,
+        setsPlayer2,
+        winnerId,
+        timestamp: Date.now(),
+    }
+
+    await push(matchesRef, matchData);
 
     return { updated1, updated2 };
 }

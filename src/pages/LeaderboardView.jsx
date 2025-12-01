@@ -32,7 +32,7 @@ function LeaderboardView() {
           <PlayerRankCard
             key={user.id}
             name={user.name}
-            avatar={user.avatar}
+            avatar={user.avatar ?? user.thumbnail}
             rating={user.rating}
             rank={index + 1}
           />

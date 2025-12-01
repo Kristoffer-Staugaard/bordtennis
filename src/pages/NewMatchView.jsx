@@ -43,7 +43,7 @@ function NewMatchView() {
 
     try {
       setStatus("processing");
-      await recordMatch(player1Id, player2Id, winnerId);
+      await recordMatch(player1Id, player2Id, winnerId, Number(setsPlayer1), Number(setsPlayer2),);
       setStatus("success");
       navigate('/');
     } catch (err) {
