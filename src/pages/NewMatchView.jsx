@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useMorningtrainUsers } from "../hooks/useMorningtrainUsers.js";
 import { recordMatch } from "../services/matchService";
+import { createBracket } from "../services/tournamentService.js";
+
 
 function NewMatchView() {
   const { users, loading, error } = useMorningtrainUsers();
@@ -13,6 +15,15 @@ function NewMatchView() {
   const [setsPlayer1, setSetsPlayer1] = useState("");
   const [setsPlayer2, setSetsPlayer2] = useState("");
   const [status, setStatus] = useState(null);
+
+  //TIL TEST
+  React.useEffect(() => {
+    if (users.length >= 8) {
+      const testBracket = createBracket(users, 8);
+      console.log('Test bracket:', testBracket);
+    }
+  }, [users]);
+
 
   const navigate = useNavigate();
 
