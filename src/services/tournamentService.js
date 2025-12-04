@@ -1,3 +1,6 @@
+import { database } from "./firebaseClient";
+import { ref, push, get, update } from "firebase/database";
+
 export function createBracket(players, size) {
   if (![8, 16, 32].includes(size)) {
     throw new Error(
@@ -56,4 +59,126 @@ export function createBracket(players, size) {
     size,
     rounds,
   };
+}
+
+export async function saveTournament(bracket) {
+  const tournamentsRef = ref(database, 'tournaments')
+
+  const tournamentData = {
+    ...bracket,
+    createdAt: Date.now(),
+    status: 'active',
+  };
+
+  const result = await push(tournamentsRef, tournamentData);
+
+  const tournamentId = result.key;
+
+  return tournamentId;
+}
+
+export async function advanceWinner(tournamentId, matchId, winnerId) {
+
+  // 1. Hent turnering fra Firebase
+  const tournamentRef = ref(database, `tournaments/${tournamentId}`);
+  const snapshot = await get(tournamentRef);
+
+  if (!snapshot.exists()) {
+    throw new Error(`Turneringen ${tournamentId} findes ikke`);
+  }
+
+  const tournament = snapshot.val()
+
+  // 2. Find en specifik kamp og marker den som 'completed'
+  let matchFound = false;
+  let matchRoundIndex = -1;
+  let matchIndexInRound = -1;
+
+  for (let roundIndex = 0; roundIndex < tournament.rounds.length; roundIndex += 1) {
+    const round = tournament.rounds[roundIndex] || [];
+
+    for (let matchIndex = 0; matchIndex < round.length; matchIndex += 1) {
+      if (round[matchIndex].id === matchId) {
+        matchFound = true;
+        matchRoundIndex = roundIndex;
+        matchIndexInRound = matchIndex;
+
+        tournament.rounds[roundIndex][matchIndex].winnerId = winnerId;
+        break;
+      }
+    }
+
+    if (matchFound) break;
+  }
+
+  if (!matchFound) {
+    throw new Error(`Kampen ${matchId} findes ikke i turneringen `)
+  }
+
+  // 3. Vælg vinders position i næste runde
+  const nextRoundIndex = matchRoundIndex + 1;
+
+  if (nextRoundIndex >= tournament.rounds.length) {
+    tournament.status = 'completed';
+    await update(tournamentRef, tournament);
+    return tournament;
+  }
+
+  const nextMatchIndex = Math.floor(matchIndexInRound / 2)
+
+  // 4. Get vinder information
+  const completedMatch = tournament.rounds[matchRoundIndex][matchIndexInRound];
+
+  let winnerInfo;
+  if (String(completedMatch.player1Id) === String(winnerId)) {
+    winnerInfo = {
+      id:completedMatch.player1Id,
+      name: completedMatch.player1Name,
+      avatar: completedMatch.player1Avatar,
+    };
+  } else {
+    winnerInfo = {
+      id: completedMatch.player2Id,
+      name: completedMatch.player2Name,
+      avatar: completedMatch.player2Avatar,
+    };
+  }
+
+  // Opret/updater næste runde
+  const nextRound = tournament.rounds[nextRoundIndex] || [];
+
+  if (nextRound.length === 0) {
+    const matchesInNextRound = tournament.rounds[matchRoundIndex].length / 2;
+    for (let i = 0; i < matchesInNextRound; i += 1) {
+      nextRound.push({
+        id: `m${nextRoundIndex + 1}-${i}`,
+        player1Id: null,
+        player1Name: null,
+        player1Avatar: null,
+        player2Id: null,
+        player2Name: null,
+        player2Avatar: null,
+        winnerId: null,
+      });
+    }
+  }
+
+  const nextMatch = nextRound[nextMatchIndex];
+
+  if (matchIndexInRound % 2 === 0) {
+    nextMatch.player1Id = winnerInfo.id;
+    nextMatch.player1Name = winnerInfo.name;
+    nextMatch.player1Avatar = winnerInfo.avatar;
+  } else {
+    nextMatch.player2Id = winnerInfo.id;
+    nextMatch.player2Name = winnerInfo.name;
+    nextMatch.player2Avatar = winnerInfo.avatar;
+  }
+
+  tournament.rounds[nextRoundIndex] = nextRound;
+
+  // 6. Push den opdaterede turnering tilbage til firebase
+  await update(tournamentRef, tournament);
+
+  return tournament;
 }
