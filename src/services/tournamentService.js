@@ -115,70 +115,86 @@ export async function advanceWinner(tournamentId, matchId, winnerId) {
     throw new Error(`Kampen ${matchId} findes ikke i turneringen `)
   }
 
-  // 3. Vælg vinders position i næste runde
-  const nextRoundIndex = matchRoundIndex + 1;
-
-  if (nextRoundIndex >= tournament.rounds.length) {
-    tournament.status = 'completed';
-    await update(tournamentRef, tournament);
-    return tournament;
-  }
-
-  const nextMatchIndex = Math.floor(matchIndexInRound / 2)
-
-  // 4. Get vinder information
-  const completedMatch = tournament.rounds[matchRoundIndex][matchIndexInRound];
-
-  let winnerInfo;
-  if (String(completedMatch.player1Id) === String(winnerId)) {
-    winnerInfo = {
-      id:completedMatch.player1Id,
-      name: completedMatch.player1Name,
-      avatar: completedMatch.player1Avatar,
-    };
-  } else {
-    winnerInfo = {
-      id: completedMatch.player2Id,
-      name: completedMatch.player2Name,
-      avatar: completedMatch.player2Avatar,
-    };
-  }
-
-  // Opret/updater næste runde
-  const nextRound = tournament.rounds[nextRoundIndex] || [];
-
-  if (nextRound.length === 0) {
-    const matchesInNextRound = tournament.rounds[matchRoundIndex].length / 2;
-    for (let i = 0; i < matchesInNextRound; i += 1) {
-      nextRound.push({
-        id: `m${nextRoundIndex + 1}-${i}`,
-        player1Id: null,
-        player1Name: null,
-        player1Avatar: null,
-        player2Id: null,
-        player2Name: null,
-        player2Avatar: null,
-        winnerId: null,
-      });
+    // 3. Ensure we have the correct number of rounds (Firebase might drop empty arrays)
+    const expectedRounds = Math.log2(tournament.size);
+    while (tournament.rounds.length < expectedRounds) {
+      tournament.rounds.push([]);
     }
-  }
-
-  const nextMatch = nextRound[nextMatchIndex];
-
-  if (matchIndexInRound % 2 === 0) {
-    nextMatch.player1Id = winnerInfo.id;
-    nextMatch.player1Name = winnerInfo.name;
-    nextMatch.player1Avatar = winnerInfo.avatar;
-  } else {
-    nextMatch.player2Id = winnerInfo.id;
-    nextMatch.player2Name = winnerInfo.name;
-    nextMatch.player2Avatar = winnerInfo.avatar;
-  }
-
-  tournament.rounds[nextRoundIndex] = nextRound;
-
-  // 6. Push den opdaterede turnering tilbage til firebase
-  await update(tournamentRef, tournament);
-
-  return tournament;
+  
+    // 4. Check if this is the final round BEFORE advancing
+    const finalRoundIndex = expectedRounds - 1; // 0-indexed, so subtract 1
+    
+    // If we're in the final round, just mark it complete and return
+    if (matchRoundIndex === finalRoundIndex) {
+      // Check if all final round matches are complete
+      const finalRound = tournament.rounds[matchRoundIndex];
+      const allFinalMatchesComplete = finalRound.every(match => match.winnerId !== null);
+      
+      if (allFinalMatchesComplete) {
+        tournament.status = 'completed';
+      }
+      
+      await update(tournamentRef, tournament);
+      return tournament;
+    }
+  
+    // 5. If not final round, proceed with advancing winner
+    const nextRoundIndex = matchRoundIndex + 1;
+    const nextMatchIndex = Math.floor(matchIndexInRound / 2);
+  
+    // 6. Get vinder information
+    const completedMatch = tournament.rounds[matchRoundIndex][matchIndexInRound];
+  
+    let winnerInfo;
+    if (String(completedMatch.player1Id) === String(winnerId)) {
+      winnerInfo = {
+        id: completedMatch.player1Id,
+        name: completedMatch.player1Name ?? null,
+        avatar: completedMatch.player1Avatar ?? null,
+      };
+    } else {
+      winnerInfo = {
+        id: completedMatch.player2Id,
+        name: completedMatch.player2Name ?? null,
+        avatar: completedMatch.player2Avatar ?? null,
+      };
+    }
+  
+    // 7. Opret/updater næste runde
+    const nextRound = tournament.rounds[nextRoundIndex] || [];
+  
+    if (nextRound.length === 0) {
+      const matchesInNextRound = tournament.rounds[matchRoundIndex].length / 2;
+      for (let i = 0; i < matchesInNextRound; i += 1) {
+        nextRound.push({
+          id: `m${nextRoundIndex + 1}-${i}`,
+          player1Id: null,
+          player1Name: null,
+          player1Avatar: null,
+          player2Id: null,
+          player2Name: null,
+          player2Avatar: null,
+          winnerId: null,
+        });
+      }
+    }
+  
+    const nextMatch = nextRound[nextMatchIndex];
+  
+    if (matchIndexInRound % 2 === 0) {
+      nextMatch.player1Id = winnerInfo.id;
+      nextMatch.player1Name = winnerInfo.name ?? null;
+      nextMatch.player1Avatar = winnerInfo.avatar ?? null;
+    } else {
+      nextMatch.player2Id = winnerInfo.id;
+      nextMatch.player2Name = winnerInfo.name ?? null;
+      nextMatch.player2Avatar = winnerInfo.avatar ?? null;
+    }
+  
+    tournament.rounds[nextRoundIndex] = nextRound;
+    
+    // 8. Push den opdaterede turnering tilbage til firebase
+    await update(tournamentRef, tournament);
+  
+    return tournament;
 }
