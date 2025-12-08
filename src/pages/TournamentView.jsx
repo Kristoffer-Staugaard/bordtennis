@@ -74,15 +74,19 @@ function TournamentView() {
               >
                 <div className="tournament-view__player">
                   {match.player1Id ? (
-                    <>
-                      <img
-                        src={match.player1Avatar}
-                        alt={match.player1Name}
-                        className="tournament-view__avatar"
-                      />
+                    <div className="tournament-view__player-content">
+                      {match.player1Avatar ? (
+                        <img
+                          src={match.player1Avatar}
+                          alt={match.player1Name}
+                          className="tournament-view__avatar"
+                        />
+                      ) : (
+                        <div className="tournament-view__avatar-placeholder" />
+                      )}
                       <span>{match.player1Name}</span>
                       {match.winnerId === match.player1Id && <span>✓</span>}
-                    </>
+                    </div>
                   ) : (
                     <span className="tournament-view__placeholder">TBD</span>
                   )}
@@ -92,15 +96,19 @@ function TournamentView() {
 
                 <div className="tournament-view__player">
                   {match.player2Id ? (
-                    <>
-                      <img
-                        src={match.player2Avatar}
-                        alt={match.player2Name}
-                        className="tournament-view__avatar"
-                      />
+                    <div className="tournament-view__player-content">
+                      {match.player2Avatar ? (
+                        <img
+                          src={match.player2Avatar}
+                          alt={match.player2Name}
+                          className="tournament-view__avatar"
+                        />
+                      ) : (
+                        <div className="tournament-view__avatar-placeholder" />
+                      )}
                       <span>{match.player2Name}</span>
                       {match.winnerId === match.player2Id && <span>✓</span>}
-                    </>
+                    </div>
                   ) : (
                     <span className="tournament-view__placeholder">TBD</span>
                   )}

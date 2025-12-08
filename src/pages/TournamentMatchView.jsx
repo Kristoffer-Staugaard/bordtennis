@@ -1,4 +1,5 @@
 import React from "react";
+import "./TournamentMatchView.scss";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { database } from "../services/firebaseClient";
@@ -89,20 +90,26 @@ function TournamentMatchView() {
     <div className="tournament-match">
       <h2>Turneringskamp</h2>
       
-      {/* Show both players */}
       <div className="tournament-match__players">
         <div>
-          <img src={match.player1Avatar} alt={match.player1Name} />
+          {match.player1Avatar ? (
+            <img src={match.player1Avatar} alt={match.player1Name} />
+          ) : (
+            <div className="tournament-match__avatar-placeholder" />
+          )}
           <h3>{match.player1Name}</h3>
         </div>
         <div>vs</div>
         <div>
-          <img src={match.player2Avatar} alt={match.player2Name} />
+          {match.player2Avatar ? (
+            <img src={match.player2Avatar} alt={match.player2Name} />
+          ) : (
+            <div className="tournament-match__avatar-placeholder" />
+          )}
           <h3>{match.player2Name}</h3>
         </div>
       </div>
 
-      {/* Input fields for sets */}
       <div className="tournament-match__score-input">
         <input
           type="number"
@@ -121,12 +128,11 @@ function TournamentMatchView() {
         />
       </div>
 
-      {/* Submit button */}
       <button
         onClick={handleSubmit}
-        disabled={!canSubmit || status === "processing"}
+        disabled={!canSubmit || status === "Arbejder..."}
       >
-        {status === "processing" ? "Logger..." : "Log kamp"}
+        {status === "Arbejder..." ? "Logger..." : "Log kamp"}
       </button>
     </div>
   );

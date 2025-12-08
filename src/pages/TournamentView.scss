@@ -1,0 +1,114 @@
+.tournament-view {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  h2 {
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: #ffffff80;
+  }
+
+  &__bracket {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 12px 0;
+  }
+
+  &__round {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 280px;
+    background-color: #FFFFFF3D;
+    padding: 12px;
+    border-radius: 20px;
+
+    h3 {
+      margin: 0 0 8px 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: #FFFFFF;
+      text-align: center;
+    }
+  }
+
+  &__match {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: #FFFFFF1A;
+    padding: 12px;
+    border-radius: 12px;
+    transition: background-color 0.2s;
+
+    &--clickable {
+      cursor: pointer;
+
+      &:hover {
+        background-color: #FFFFFF26;
+      }
+    }
+
+    &--completed {
+      background-color: #FFFFFF26;
+      opacity: 0.8;
+    }
+  }
+
+  &__player {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__player-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+
+    span {
+      font-size: 16px;
+      font-weight: 400;
+      color: #FFFFFF;
+    }
+  }
+
+  &__avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 100%;
+    background-color: #FFFFFF;
+    object-fit: cover;
+  }
+
+  &__avatar-placeholder {
+    width: 28px;
+    height: 28px;
+    border-radius: 100%;
+    background-color: #FFFFFF3D;
+  }
+
+  &__vs {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    color: #ffffff80;
+    margin: 4px 0;
+  }
+
+  &__placeholder {
+    font-size: 14px;
+    font-weight: 400;
+    color: #ffffff80;
+    font-style: italic;
+  }
+}
+
