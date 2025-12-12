@@ -1,0 +1,91 @@
+.tournament-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  
+    h2 {
+      margin: 0;
+    }
+  
+    &__empty {
+      text-align: center;
+      color: #ffffff80;
+      padding: 32px;
+    }
+  
+    &__container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+  
+    &__item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background-color: #FFFFFF3D;
+      padding: 12px;
+      border-radius: 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: background-color 0.2s;
+  
+      &:hover {
+        background-color: #FFFFFF26;
+      }
+    }
+  
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  
+      h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: #FFFFFF;
+      }
+    }
+  
+    &__status {
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 400;
+  
+      &--active {
+        background-color: #FF9452;
+        color: #FFFFFF;
+      }
+  
+      &--completed {
+        background-color: #FFFFFF3D;
+        color: #ffffff80;
+      }
+    }
+  
+    &__info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+  
+      p {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 400;
+        color: #ffffff80;
+      }
+    }
+  
+    &__date {
+      // Already styled above
+    }
+  
+    &__winner {
+      strong {
+        color: #FFFFFF;
+        font-weight: 600;
+      }
+    }
+  }
