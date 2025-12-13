@@ -7,7 +7,8 @@ import TournamentCreateView from './pages/TournamentCreateView.jsx'
 import TournamentView from './pages/TournamentView.jsx'
 import TournamentMatchView from './pages/TournamentMatchView.jsx'
 import TournamentListView from './pages/TournamentListView.jsx'
-import { Routes, Route, Link } from 'react-router-dom'
+import BottomNav from './components/BottomNav.jsx'
+import { Routes, Route } from 'react-router-dom'
 
 
 
@@ -26,15 +27,9 @@ function App() {
         <Route path='/tournament/:tournamentId' element={<TournamentView />} />
         <Route path='/tournament/:tournamentId/match/:matchId' element={<TournamentMatchView />} />
         <Route path='/turneringer' element={<TournamentListView />} />
-
       </Routes>
 
-      <nav className="app-nav">
-        <Link to="/">Leaderboard</Link>
-        <Link to="/profile">Profile</Link>
-        <Link to='/create'>Opret</Link>
-        <Link to="/turneringer">Turneringer</Link>
-      </nav>
+      <BottomNav />
     </main>
   )
 }

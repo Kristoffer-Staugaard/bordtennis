@@ -39,4 +39,35 @@
         flex-direction: column;
         align-items: center;
     }
+
+    &__favorite {
+        background-color: #FFFFFF3D;
+        border: none;
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+
+        &--active {
+            background-color: #FF945226;
+        }
+
+        &-icon {
+            width: 24px;
+            height: 24px;
+
+            path {
+                stroke: #ffffff80;
+            }
+        }
+
+        &--active &-icon path {
+            stroke: #FF9452;
+            fill: #FF9452;
+        }
+    }
 }
