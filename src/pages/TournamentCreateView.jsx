@@ -4,8 +4,12 @@ import { useState } from "react";
 import { useMorningtrainUsers } from "../hooks/useMorningtrainUsers";
 import { createBracket, saveTournament } from "../services/tournamentService";
 import { useNavigate } from "react-router-dom";
+import { useAdminAuth } from "../hooks/useAdminAuth";
+import AuthModal from "../components/AuthModal.jsx";
 
 function TournamentCreationView() {
+  const { loading: authLoading, hasAccess, verifyPassword, error: authError } =
+    useAdminAuth();
   const { users, loading, error } = useMorningtrainUsers();
   const [selectedPlayerIds, setSelectedPlayerIds] = useState([]);
   const [bracketSize, setBracketSize] = useState(8);
@@ -13,8 +17,19 @@ function TournamentCreationView() {
 
   const navigate = useNavigate();
 
-  if (loading) return <p>Loading...</p>;
+  if (authLoading || loading) return <p>Loading...</p>;
   if (error) return <p>Failed to load users</p>;
+
+  if (!hasAccess) {
+    return (
+      <AuthModal
+        onSubmit={(password) => {
+          verifyPassword(password);
+        }}
+        error={authError}
+      />
+    );
+  }
 
   const handleCreate = async () => {
     if (selectedPlayerIds.length !== bracketSize) {

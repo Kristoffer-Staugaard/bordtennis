@@ -1,0 +1,87 @@
+.auth-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.auth-modal__backdrop {
+  position: absolute;
+}
+
+.auth-modal__content {
+  position: relative;
+  background: #ffffff14;
+  border: 1px solid #ffffff1a;
+  padding: 22px 20px;
+  border-radius: 18px;
+  max-width: 360px;
+  width: 100%;
+  color: #ffffff;
+}
+
+.auth-modal__title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  color: #ffffff;
+}
+
+.auth-modal__text {
+  margin: 0 0 18px;
+  font-size: 14px;
+  color: #ffffffb3;
+  text-align: center;
+}
+
+.auth-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-modal__input {
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ffffff33;
+  background: #ffffff1a;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+
+  &::placeholder {
+    color: #ffffff80;
+  }
+
+  &:focus {
+    border-color: #ff9452;
+    box-shadow: 0 0 0 3px #ff945233;
+    background: #ffffff26;
+  }
+}
+
+.auth-modal__button {
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: #ff9452;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.auth-modal__button:focus-visible {
+  outline: 2px solid #ff9452;
+}
+
+.auth-modal__error {
+  margin: 0;
+  font-size: 12px;
+  color: #ff6b6b;
+  text-align: center;
+}

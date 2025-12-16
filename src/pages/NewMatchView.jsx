@@ -6,9 +6,13 @@ import { useState } from "react";
 import { useMorningtrainUsers } from "../hooks/useMorningtrainUsers.js";
 import { recordMatch } from "../services/matchService";
 import { createBracket } from "../services/tournamentService.js";
+import { useAdminAuth } from "../hooks/useAdminAuth";
+import AuthModal from "../components/AuthModal.jsx";
 
 
 function NewMatchView() {
+  const { loading: authLoading, hasAccess, verifyPassword, error: authError } =
+    useAdminAuth();
   const { users, loading, error } = useMorningtrainUsers();
   const [player1Id, setPlayer1Id] = useState("");
   const [player2Id, setPlayer2Id] = useState("");
@@ -27,8 +31,19 @@ function NewMatchView() {
 
   const navigate = useNavigate();
 
-  if (loading) return <p>loading...</p>;
+  if (authLoading || loading) return <p>loading...</p>;
   if (error) return <p>failed to load</p>;
+
+  if (!hasAccess) {
+    return (
+      <AuthModal
+        onSubmit={(password) => {
+          verifyPassword(password);
+        }}
+        error={authError}
+      />
+    );
+  }
 
   const determineWinnerId = () => {
     const sets1 = Number(setsPlayer1);
