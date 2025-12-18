@@ -1,3 +1,5 @@
+@import '../App.scss';
+
 .player-rank-card {
     display: flex;
     justify-content: space-between;
@@ -15,7 +17,7 @@
     }
 
     &__avatar-container {
-        background-color: #FFFFFF;
+        background-color: $white;
         height: 28px;
         width: 28px;
         border-radius: 100%;

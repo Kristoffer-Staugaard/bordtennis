@@ -1,9 +1,10 @@
 
+@import '../../App.scss';
 
 .player-stats {
     display: flex;
     justify-content: space-between;
-    background-color: #FFFFFF3D;
+    background-color: $white-24;
     padding: 12px 16px;
     border-radius: 16px;
 
@@ -16,6 +17,6 @@
     &__divider {
         height: -webkit-fill-available;
         width: 1px;
-        background-color: #FFFFFF;
+        background-color: $white;
     }
 }

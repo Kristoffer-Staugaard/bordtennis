@@ -1,3 +1,5 @@
+@import '../App.scss';
+
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -6,10 +8,10 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #FFFFFF3D;
+  background-color: $white-24;
   backdrop-filter: blur(10px);
   padding: 12px 0;
-  border-top: 1px solid #FFFFFF1A;
+  border-top: 1px solid $white-10;
   z-index: 1000;
 
   &__item {
@@ -18,15 +20,15 @@
     align-items: center;
     gap: 4px;
     text-decoration: none;
-    color: #ffffff80;
+    color: $white-80;
     transition: color 0.2s;
     padding: 8px 16px;
     border-radius: 12px;
     min-width: 60px;
 
     &--active {
-      color: #FF9452;
-      background-color: #FFFFFF1A;
+      color: $primary;
+      background-color: $white-10;
     }
 
     &--disabled {
@@ -35,7 +37,7 @@
     }
 
     &:hover:not(&--disabled) {
-      color: #FFFFFF;
+      color: $white;
     }
   }
 

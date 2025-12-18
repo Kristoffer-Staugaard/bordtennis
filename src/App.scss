@@ -1,3 +1,14 @@
+$white: #FFFFFF;
+$white-80: #ffffff80;
+$white-24: #FFFFFF3D;
+$white-15: #ffffff26;
+$white-10: #ffffff1a;
+
+$primary: #FF9452;
+
+$background: #06071a;
+$error: #ff6b6b;
+
 * {
     box-sizing: border-box;
   }
@@ -7,8 +18,8 @@ body {
     overflow-x: hidden;
     font-family: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI",
       "Roboto", sans-serif;
-    background-color: #06071a;
-    color: #ffffff;
+    background-color: $background;
+    color: $white;
     position: relative;
     padding: 32px 20px;
   }
@@ -16,41 +27,41 @@ body {
   h1 {
     font-size: 24px;
     font-weight: 800;
-    color: #FFFFFF;
+    color: $white;
     margin: 0;
   }
 
   h2 {
     font-size: 20px;
     font-weight: 600;
-    color: #FFFFFF;
+    color: $white;
     margin: 0;
   }
 
   h3 {
     font-size: 20px;
     font-weight: 400;
-    color: #FFFFFF;
+    color: $white;
     margin: 0;
   }
   
   h4 {
     font-size: 16px;
     font-weight: 600px;
-    color: #FFFFFF;
+    color: $white;
     margin: 0;
   }
 
   h5 {
     font-size: 16px;
     font-weight: 400;
-    color: #FFFFFF;
+    color: $white;
     margin: 0;
   }
 
   h6 {
     font-size: 14px;
     font-weight: 400;
-    color: #ffffff80;
+    color: $white-80;
     margin: 0;
   }

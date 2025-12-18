@@ -2,8 +2,8 @@ name: Sync Infoscreen Users
 
 on:
   schedule:
-    - cron: '0 2 * * *' # every 24 hours at 02:00 UTC
-  workflow_dispatch:      # allows manual runs
+    - cron: '0 2 * * *' # hver 24 timer
+  workflow_dispatch:      # manuelt i github
 
 jobs:
   sync:

@@ -1,16 +1,18 @@
+@import '../App.scss';
+
 .new-match {
 
     &__container {
         display: flex;
         flex-direction: column;
         gap: 12px;
-        background-color: #FFFFFF3D;
+        background-color: $white-24;
         padding: 12px;
         border-radius: 20px;
     }
 
     &__dropdown {
-        background-color: #FFFFFF3D;
+        background-color: $white-24;
         padding: 12px;
         border-radius: 12px;
 
@@ -23,7 +25,7 @@
 
     &__input {
         width: 100%;
-        background-color: #FFFFFF3D;
+        background-color: $white-24;
         padding: 12px;
         border-radius: 12px;
         border: none;
@@ -61,19 +63,19 @@
     &__player1-img {
         height: 28px;
         width: 28px;
-        background-color: #FFFFFF;
+        background-color: $white;
         border-radius: 100%;
     }
 
     &__player2-img {
         height: 28px;
         width: 28px;
-        background-color: #FFFFFF;
+        background-color: $white;
         border-radius: 100%;
     }
 
     &__img-container {
-        background-color: #FFFFFF;
+        background-color: $white;
         height: 28px;
         width: 28px;
         border-radius: 100%;

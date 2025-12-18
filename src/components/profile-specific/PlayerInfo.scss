@@ -1,3 +1,5 @@
+@import '../../App.scss';
+
 .player-info {
     display: flex;
     flex-direction: column;
@@ -5,7 +7,7 @@
     gap: 20px;
 
     &__img-container {
-        background-color: #FFFFFF;
+        background-color: $white;
         width: 88px;
         height: 88px;
         border-radius: 100%;
@@ -16,12 +18,12 @@
         width: 88px;
         height: 88px;
         border-radius: 100%;
-        border: solid 3px #FF9452
+        border: solid 3px $primary
 
     }
 
     &__rank-container {
-        background-color: #FF9452;
+        background-color: $primary;
         position: absolute;
         display: flex;
         justify-content: center;
@@ -41,7 +43,7 @@
     }
 
     &__favorite {
-        background-color: #FFFFFF3D;
+        background-color: $white-24;
         border: none;
         width: 48px;
         height: 48px;
@@ -61,13 +63,13 @@
             height: 24px;
 
             path {
-                stroke: #ffffff80;
+                stroke: $white-80;
             }
         }
 
         &--active &-icon path {
-            stroke: #FF9452;
-            fill: #FF9452;
+            stroke: $primary;
+            fill: $primary;
         }
     }
 }

@@ -1,3 +1,5 @@
+@import '../App.scss';
+
 .tournament-list {
     display: flex;
     flex-direction: column;
@@ -9,7 +11,7 @@
   
     &__empty {
       text-align: center;
-      color: #ffffff80;
+      color: $white-80;
       padding: 32px;
     }
   
@@ -23,7 +25,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      background-color: #FFFFFF3D;
+      background-color: $white-24;
       padding: 12px;
       border-radius: 20px;
       text-decoration: none;
@@ -31,7 +33,7 @@
       transition: background-color 0.2s;
   
       &:hover {
-        background-color: #FFFFFF26;
+        background-color: $white-15;
       }
     }
   
@@ -44,7 +46,7 @@
         margin: 0;
         font-size: 16px;
         font-weight: 600;
-        color: #FFFFFF;
+        color: $white;
       }
     }
   
@@ -55,13 +57,13 @@
       font-weight: 400;
   
       &--active {
-        background-color: #FF9452;
-        color: #FFFFFF;
+        background-color: $primary;
+        color: $white;
       }
   
       &--completed {
-        background-color: #FFFFFF3D;
-        color: #ffffff80;
+        background-color: $white-24;
+        color: $white-80;
       }
     }
   
@@ -74,7 +76,7 @@
         margin: 0;
         font-size: 14px;
         font-weight: 400;
-        color: #ffffff80;
+        color: $white-80;
       }
     }
   
@@ -84,7 +86,7 @@
   
     &__winner {
       strong {
-        color: #FFFFFF;
+        color: $white;
         font-weight: 600;
       }
     }

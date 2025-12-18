@@ -1,3 +1,5 @@
+@import '../../App.scss';
+
 .match-history {
     display: flex;
     justify-content: space-between;
@@ -12,7 +14,7 @@
     &__profile-img {
         width: 28px;
         height: 28px;
-        background-color: #FFFFFF;
+        background-color: $white;
         border-radius: 100%;
     }
 

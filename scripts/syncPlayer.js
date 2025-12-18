@@ -49,7 +49,7 @@ async function main() {
     };
   }
 
-  // Remove users that are no longer present
+  // Fjern brugere som ikke er i API'et længere
   Object.keys(existing).forEach((id) => {
     if (!mapped.some((user) => String(user.id) === id)) {
       updates[`${USER_PATH}/${id}`] = null;

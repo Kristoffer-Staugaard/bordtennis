@@ -1,3 +1,5 @@
+@import '../App.scss';
+
 .auth-modal {
   position: fixed;
   inset: 0;
@@ -14,13 +16,13 @@
 
 .auth-modal__content {
   position: relative;
-  background: #ffffff14;
-  border: 1px solid #ffffff1a;
+  background: $white-10;
+  border: 1px solid $white-10;
   padding: 22px 20px;
   border-radius: 18px;
   max-width: 360px;
   width: 100%;
-  color: #ffffff;
+  color: $white;
 }
 
 .auth-modal__title {
@@ -28,13 +30,13 @@
   font-size: 20px;
   font-weight: 700;
   text-align: center;
-  color: #ffffff;
+  color: $white;
 }
 
 .auth-modal__text {
   margin: 0 0 18px;
   font-size: 14px;
-  color: #ffffffb3;
+  color: $white-80;
   text-align: center;
 }
 
@@ -47,20 +49,20 @@
 .auth-modal__input {
   padding: 12px;
   border-radius: 12px;
-  border: 1px solid #ffffff33;
-  background: #ffffff1a;
-  color: #ffffff;
+  border: 1px solid $white-10;
+  background: $white-10;
+  color: $white;
   font-size: 14px;
   outline: none;
 
   &::placeholder {
-    color: #ffffff80;
+    color: $white-80;
   }
 
   &:focus {
-    border-color: #ff9452;
+    border-color: $primary;
     box-shadow: 0 0 0 3px #ff945233;
-    background: #ffffff26;
+    background: $white-15;
   }
 }
 
@@ -68,20 +70,20 @@
   padding: 12px;
   border-radius: 12px;
   border: none;
-  background: #ff9452;
-  color: #FFFFFF;
+  background: $primary;
+  color: $white;
   font-weight: 700;
   font-size: 15px;
   cursor: pointer;
 }
 
 .auth-modal__button:focus-visible {
-  outline: 2px solid #ff9452;
+  outline: 2px solid $primary;
 }
 
 .auth-modal__error {
   margin: 0;
   font-size: 12px;
-  color: #ff6b6b;
+  color: $error;
   text-align: center;
 }

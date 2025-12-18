@@ -1,7 +1,9 @@
+@import '../App.scss';
+
 .leaderboard {
 
     &__background {
-        background-color: #FFFFFF3D;
+        background-color: $white-24;
         padding: 12px;
         border-radius: 20px;
     }
@@ -9,7 +11,7 @@
     &__label {
         display: flex;
         justify-content: space-between;
-        background-color: #FFFFFF3D;
+        background-color: $white-24;
         padding: 12px 16px;
         border-radius: 16px;
     }
