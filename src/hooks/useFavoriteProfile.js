@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-const FAVORITE_KEY = 'favoriteProfileId';
+const FAVORITE_KEY = "favoriteProfileId";
 
 export function useFavoriteProfile() {
   const [favoriteId, setFavoriteId] = useState(() => {
@@ -25,7 +25,6 @@ export function useFavoriteProfile() {
   return {
     favoriteId,
     setFavorite,
-    isFavorite,
+    isFavorite
   };
 }
-

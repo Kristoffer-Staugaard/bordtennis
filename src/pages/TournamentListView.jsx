@@ -15,19 +15,19 @@ function TournamentListView() {
     return date.toLocaleDateString("da-DK", {
       day: "numeric",
       month: "long",
-      year: "numeric",
+      year: "numeric"
     });
   };
 
   const getWinner = (tournament) => {
     if (tournament.status !== "completed") return null;
-    
+
     const finalRound = tournament.rounds?.[tournament.rounds.length - 1];
     if (!finalRound || finalRound.length === 0) return null;
-    
+
     const finalMatch = finalRound[0];
     if (!finalMatch?.winnerId) return null;
-    
+
     // Find winner name from the match
     if (String(finalMatch.player1Id) === String(finalMatch.winnerId)) {
       return finalMatch.player1Name;
@@ -45,7 +45,7 @@ function TournamentListView() {
         <div className="tournament-list__container">
           {tournaments.map((tournament) => {
             const winner = getWinner(tournament);
-            
+
             return (
               <Link
                 key={tournament.id}
@@ -60,7 +60,7 @@ function TournamentListView() {
                     {tournament.status === "active" ? "Aktiv" : "Afsluttet"}
                   </span>
                 </div>
-                
+
                 <div className="tournament-list__info">
                   <p className="tournament-list__date">
                     {formatDate(tournament.createdAt)}

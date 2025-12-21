@@ -22,9 +22,15 @@ function BottomNav() {
     <nav className="bottom-nav">
       <Link
         to="/"
-        className={`bottom-nav__item ${isActive("/") ? "bottom-nav__item--active" : ""}`}
+        className={`bottom-nav__item ${
+          isActive("/") ? "bottom-nav__item--active" : ""
+        }`}
       >
-        <img src={leaderboardIcon} alt="Rangliste" className="bottom-nav__icon" />
+        <img
+          src={leaderboardIcon}
+          alt="Rangliste"
+          className="bottom-nav__icon"
+        />
         <h6>Rangliste</h6>
       </Link>
 
@@ -50,7 +56,9 @@ function BottomNav() {
 
       <Link
         to="/create"
-        className={`bottom-nav__item ${isActive("/create") ? "bottom-nav__item--active" : ""}`}
+        className={`bottom-nav__item ${
+          isActive("/create") ? "bottom-nav__item--active" : ""
+        }`}
       >
         <img src={opretIcon} alt="Opret" className="bottom-nav__icon" />
         <h6>Opret</h6>
@@ -62,7 +70,11 @@ function BottomNav() {
           isActive("/turneringer") ? "bottom-nav__item--active" : ""
         }`}
       >
-        <img src={turneringIcon} alt="Turneringer" className="bottom-nav__icon" />
+        <img
+          src={turneringIcon}
+          alt="Turneringer"
+          className="bottom-nav__icon"
+        />
         <h6>Turneringer</h6>
       </Link>
     </nav>
@@ -70,4 +82,3 @@ function BottomNav() {
 }
 
 export default BottomNav;
-

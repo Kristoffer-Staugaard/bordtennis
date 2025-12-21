@@ -59,28 +59,28 @@ function TournamentView() {
         {tournament.rounds.map((round, roundIndex) => (
           <div key={roundIndex} className="tournament-view__round">
             <h3>Runde {roundIndex + 1}</h3>
-            
+
             {round.map((match) => (
-                            <div
-                            key={match.id}
-                            className={`tournament-view__match ${
+              <div
+                key={match.id}
+                className={`tournament-view__match ${
                   match.winnerId ? "tournament-view__match--completed" : ""
-                            } ${
-                              match.player1Id && match.player2Id && !match.winnerId
+                } ${
+                  match.player1Id && match.player2Id && !match.winnerId
                     ? "tournament-view__match--clickable"
                     : ""
-                            }`}
-                            onClick={() => handleMatchClick(match)}
-                          >
+                }`}
+                onClick={() => handleMatchClick(match)}
+              >
                 <div className="tournament-view__player">
                   {match.player1Id ? (
                     <div className="tournament-view__player-content">
                       {match.player1Avatar ? (
-                      <img
+                        <img
                           src={match.player1Avatar}
-                        alt={match.player1Name}
-                        className="tournament-view__avatar"
-                      />
+                          alt={match.player1Name}
+                          className="tournament-view__avatar"
+                        />
                       ) : (
                         <div className="tournament-view__avatar-placeholder" />
                       )}
@@ -98,11 +98,11 @@ function TournamentView() {
                   {match.player2Id ? (
                     <div className="tournament-view__player-content">
                       {match.player2Avatar ? (
-                      <img
+                        <img
                           src={match.player2Avatar}
-                        alt={match.player2Name}
-                        className="tournament-view__avatar"
-                      />
+                          alt={match.player2Name}
+                          className="tournament-view__avatar"
+                        />
                       ) : (
                         <div className="tournament-view__avatar-placeholder" />
                       )}

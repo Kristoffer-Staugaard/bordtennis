@@ -9,7 +9,7 @@ const adminKey = require("../firebaseAdminKey.json");
 initializeApp({
   credential: cert(adminKey),
   databaseURL:
-    "https://bordtennis-app-default-rtdb.europe-west1.firebasedatabase.app",
+    "https://bordtennis-app-default-rtdb.europe-west1.firebasedatabase.app"
 });
 
 const db = getDatabase();
@@ -20,7 +20,7 @@ function mapUser(user) {
     id: user.id,
     name: user.name,
     thumbnail: user.profilePicture?.thumbnail ?? null,
-    avatar: user.profilePicture?.avatar_size ?? null,
+    avatar: user.profilePicture?.avatar_size ?? null
   };
 }
 
@@ -38,18 +38,18 @@ async function main() {
 
   const updates = {};
 
-  // Add or update users
+  // tilføj eller opdater brugere
   for (const user of mapped) {
     const existingUser = existing[user.id];
     const rating = existingUser?.rating ?? 1500;
 
     updates[`${USER_PATH}/${user.id}`] = {
       ...user,
-      rating,
+      rating
     };
   }
 
-  // Fjern brugere som ikke er i API'et længere
+  // Fjern brugere som ikke er i API'et længeren
   Object.keys(existing).forEach((id) => {
     if (!mapped.some((user) => String(user.id) === id)) {
       updates[`${USER_PATH}/${id}`] = null;

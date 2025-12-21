@@ -9,10 +9,13 @@ import { createBracket } from "../services/tournamentService.js";
 import { useAdminAuth } from "../hooks/useAdminAuth";
 import AuthModal from "../components/AuthModal.jsx";
 
-
 function NewMatchView() {
-  const { loading: authLoading, hasAccess, verifyPassword, error: authError } =
-    useAdminAuth();
+  const {
+    loading: authLoading,
+    hasAccess,
+    verifyPassword,
+    error: authError
+  } = useAdminAuth();
   const { users, loading, error } = useMorningtrainUsers();
   const [player1Id, setPlayer1Id] = useState("");
   const [player2Id, setPlayer2Id] = useState("");
@@ -24,10 +27,9 @@ function NewMatchView() {
   React.useEffect(() => {
     if (users.length >= 8) {
       const testBracket = createBracket(users, 8);
-      console.log('Test bracket:', testBracket);
+      console.log("Test bracket:", testBracket);
     }
   }, [users]);
-
 
   const navigate = useNavigate();
 
@@ -69,9 +71,15 @@ function NewMatchView() {
 
     try {
       setStatus("processing");
-      await recordMatch(player1Id, player2Id, winnerId, Number(setsPlayer1), Number(setsPlayer2),);
+      await recordMatch(
+        player1Id,
+        player2Id,
+        winnerId,
+        Number(setsPlayer1),
+        Number(setsPlayer2)
+      );
       setStatus("success");
-      navigate('/');
+      navigate("/");
     } catch (err) {
       console.error(err);
       setStatus("error");
@@ -177,9 +185,9 @@ function NewMatchView() {
         <button
           className="new-match__submit"
           onClick={handleSubmit}
-          disabled={!canSubmit || status === 'Logger kamp...'}
+          disabled={!canSubmit || status === "Logger kamp..."}
         >
-          {status === 'processing' ? 'Logger...' : 'Log kamp'}
+          {status === "processing" ? "Logger..." : "Log kamp"}
         </button>
       </div>
     </div>

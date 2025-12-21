@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import './AuthModal.scss';
+import React, { useState } from "react";
+import "./AuthModal.scss";
 
 function AuthModal({ onSubmit, error }) {
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit(password);
-    setPassword('');
+    setPassword("");
   };
 
   return (
@@ -37,5 +37,3 @@ function AuthModal({ onSubmit, error }) {
 }
 
 export default AuthModal;
-
-

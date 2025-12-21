@@ -1,11 +1,12 @@
-import { initializeApp } from 'firebase/app';
-import { getDatabase, ref } from 'firebase/database';
-import { getAuth } from 'firebase/auth';
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref } from "firebase/database";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "bordtennis-app.firebaseapp.com",
-  databaseURL: "https://bordtennis-app-default-rtdb.europe-west1.firebasedatabase.app",
+  databaseURL:
+    "https://bordtennis-app-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "bordtennis-app",
   storageBucket: "bordtennis-app.firebasestorage.app",
   messagingSenderId: "297229326660",
