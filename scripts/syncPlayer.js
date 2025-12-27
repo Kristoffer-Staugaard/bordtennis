@@ -4,7 +4,19 @@ import { getDatabase } from "firebase-admin/database";
 import { createRequire } from "module";
 
 const require = createRequire(import.meta.url);
-const adminKey = require("../firebaseAdminKey.json");
+
+let adminKey;
+if (process.env.FIREBASE_ADMIN_KEY_BASE64) {
+  try {
+    const decoded = Buffer.from(process.env.FIREBASE_ADMIN_KEY_BASE64, "base64").toString("utf8");
+    adminKey = JSON.parse(decoded);
+  } catch (err) {
+    console.error("Failed to parse FIREBASE_ADMIN_KEY_BASE64", err);
+    process.exit(1);
+  }
+} else {
+  adminKey = require("../firebaseAdminKey.json");
+}
 
 initializeApp({
   credential: cert(adminKey),
