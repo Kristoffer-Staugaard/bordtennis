@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
-import { auth } from '../services/firebaseClient';
-import { onAuthStateChanged, signInAnonymously } from 'firebase/auth';
+import { useEffect, useState } from "react";
+import { auth } from "../services/firebaseClient";
+import { onAuthStateChanged, signInAnonymously } from "firebase/auth";
 
-const ACCESS_KEY = 'bt_admin_access';
+const ACCESS_KEY = "bt_admin_access";
 
 export function useAdminAuth() {
   const [loading, setLoading] = useState(true);
   const [hasAccess, setHasAccess] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return localStorage.getItem(ACCESS_KEY) === 'true';
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem(ACCESS_KEY) === "true";
   });
   const [error, setError] = useState(null);
 
@@ -18,8 +18,8 @@ export function useAdminAuth() {
         try {
           await signInAnonymously(auth);
         } catch (err) {
-          console.error('Anonymous auth failed', err);
-          setError('Kunne ikke logge ind anonymt');
+          console.error("Anonymous auth failed", err);
+          setError("Kunne ikke logge ind anonymt");
         }
       }
       setLoading(false);
@@ -32,17 +32,17 @@ export function useAdminAuth() {
     const expected = import.meta.env.VITE_ADMIN_PASSWORD;
 
     if (!expected) {
-      console.warn('VITE_ADMIN_PASSWORD er ikke sat i miljøvariablerne');
+      console.warn("VITE_ADMIN_PASSWORD er ikke sat i miljøvariablerne");
     }
 
     if (password && expected && password === expected) {
-      localStorage.setItem(ACCESS_KEY, 'true');
+      localStorage.setItem(ACCESS_KEY, "true");
       setHasAccess(true);
       setError(null);
       return true;
     }
 
-    setError('Forkert kodeord');
+    setError("Forkert kodeord");
     return false;
   };
 
@@ -56,8 +56,6 @@ export function useAdminAuth() {
     hasAccess,
     verifyPassword,
     error,
-    logout,
+    logout
   };
 }
-
-
